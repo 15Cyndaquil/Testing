@@ -1,201 +1,254 @@
 package homework.ch14.prob_2;
 
-import com.sun.glass.ui.Size;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-/**
- * Created by 15Cyndaquil on 4/13/2017.
- */
+import java.util.Optional;
+
+
 public class TicTacToe extends Application {
+    private Boolean circle = true;
+
+    private RowConstraints rowMain = new RowConstraints();
+    private ColumnConstraints columnMain = new ColumnConstraints();
+
+    private Button topLeft = new Button();
+    private Button topMid = new Button();
+    private Button topRight = new Button();
+
+    private Button midLeft = new Button();
+    private Button midMid = new Button();
+    private Button midRight = new Button();
+
+    private Button botLeft = new Button();
+    private Button botMid = new Button();
+    private Button botRight = new Button();
+
+    private Button getGraphic = new Button();
+
+    private GridPane grid = new GridPane();
+    String gridButton[] = new String[9];
+    String gridButtonValue[] = new String[9];
+    Scene scene;
+
     @Override
     public void start(Stage primaryStage){
-        GridPane grid = new GridPane();
+        for(int i=0; i<gridButton.length; i++){
+            gridButton[i] = String.valueOf(i);
+        }
+        for(int i=0; i<gridButtonValue.length; i++){
+            gridButtonValue[i] = "";
+        }
         grid.setGridLinesVisible(true);
-        Scene scene = new Scene(grid, 666, 666);
+
+        Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(10,10,10,10)));
+        scene = new Scene(grid, 250, 250, Color.BLACK);
         primaryStage.setScene(scene);
 
-        ColumnConstraints columnMain = new ColumnConstraints();
-        ColumnConstraints columnBetween = new ColumnConstraints();
-        columnMain.setPercentWidth(30);
-        columnBetween.setPercentWidth(5.5);
-        RowConstraints rowMain = new RowConstraints();
-        RowConstraints rowBetween = new RowConstraints();
-        rowMain.setPercentHeight(30);
-        rowBetween.setPercentHeight(5.5);
+        columnMain.setPercentWidth(33.33);
+        rowMain.setPercentHeight(33.33);
 
-        grid.getRowConstraints().addAll(rowMain, rowBetween, rowMain, rowBetween, rowMain);
-        grid.getColumnConstraints().addAll(columnMain, columnBetween, columnMain, columnBetween, columnMain);
-        grid.setBackground(new Background(new BackgroundFill(Paint.valueOf("white"), null,null)));
+        grid.getRowConstraints().addAll(rowMain, rowMain, rowMain);
+        grid.getColumnConstraints().addAll(columnMain, columnMain, columnMain);
 
-        Button topLeft = new Button();
-        Button topMid = new Button();
-        Button topRight = new Button();
+        topLeft.setBorder(border);
+        topMid.setBorder(border);
+        topRight.setBorder(border);
 
-        Button midLeft = new Button();
-        Button midMid = new Button();
-        Button midRight = new Button();
+        midLeft.setBorder(border);
+        midMid.setBorder(border);
+        midRight.setBorder(border);
 
-        Button botLeft = new Button();
-        Button botMid = new Button();
-        Button botRight = new Button();
-
-//      Created Boarders between Buttons
-        Rectangle b1 = new Rectangle();
-        Rectangle b2 = new Rectangle();
-        Rectangle b3 = new Rectangle();
-        Rectangle b4 = new Rectangle();
-        Rectangle b5 = new Rectangle();
-        Rectangle b6 = new Rectangle();
-        Rectangle b11 = new Rectangle();
-        Rectangle b12 = new Rectangle();
-        Rectangle b13 = new Rectangle();
-        Rectangle b14 = new Rectangle();
-        Rectangle b15 = new Rectangle();
-        Rectangle b21 = new Rectangle();
-        Rectangle b22 = new Rectangle();
-        Rectangle b23 = new Rectangle();
-        Rectangle b24 = new Rectangle();
-        Rectangle b25 = new Rectangle();
-
-        b1.setFill(Color.BLACK);
-        b2.setFill(Color.BLACK);
-        b3.setFill(Color.BLACK);
-        b4.setFill(Color.BLACK);
-        b5.setFill(Color.BLACK);
-        b6.setFill(Color.BLACK);
-
-        b11.setFill(Color.BLACK);
-        b12.setFill(Color.BLACK);
-        b13.setFill(Color.BLACK);
-        b14.setFill(Color.BLACK);
-        b15.setFill(Color.BLACK);
-
-        b21.setFill(Color.BLACK);
-        b22.setFill(Color.BLACK);
-        b23.setFill(Color.BLACK);
-        b24.setFill(Color.BLACK);
-        b25.setFill(Color.BLACK);
-
-        topLeft.setBackground(new Background(
-                new BackgroundImage(
-                        new Image("homework/ch14/prob_2/o.gif"),BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+        botLeft.setBorder(border);
+        botMid.setBorder(border);
+        botRight.setBorder(border);
 
 
-        scene.widthProperty().addListener(new ChangeListener<Number>() {
-            @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                System.out.println("Width: " + newSceneWidth);
-                topLeft.setMinWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
-                topMid.setMinWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
-                topRight.setMinWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
+        buttonWidth(topLeft, scene.getWidth());
+        buttonWidth(topMid, scene.getWidth());
+        buttonWidth(topRight, scene.getWidth());
 
-                midLeft.setMinWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
-                midMid.setMinWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
-                midRight.setMinWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
+        buttonWidth(midLeft, scene.getWidth());
+        buttonWidth(midMid, scene.getWidth());
+        buttonWidth(midRight, scene.getWidth());
 
-                botLeft.setMinWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
-                botMid.setMinWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
-                botRight.setMinWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
+        buttonWidth(botLeft, scene.getWidth());
+        buttonWidth(botMid, scene.getWidth());
+        buttonWidth(botRight, scene.getWidth());
 
-                b1.setWidth((newSceneWidth.doubleValue()*columnBetween.getPercentWidth()/100));
-                b2.setWidth((newSceneWidth.doubleValue()*columnBetween.getPercentWidth()/100));
-                b3.setWidth((newSceneWidth.doubleValue()*columnBetween.getPercentWidth()/100));
-                b4.setWidth((newSceneWidth.doubleValue()*columnBetween.getPercentWidth()/100));
-                b5.setWidth((newSceneWidth.doubleValue()*columnBetween.getPercentWidth()/100));
-                b6.setWidth((newSceneWidth.doubleValue()*columnBetween.getPercentWidth()/100));
+        buttonHeight(topLeft, scene.getHeight());
+        buttonHeight(topMid, scene.getHeight());
+        buttonHeight(topRight, scene.getHeight());
 
-                b11.setWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
-                b12.setWidth((newSceneWidth.doubleValue()*columnBetween.getPercentWidth()/100));
-                b13.setWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
-                b14.setWidth((newSceneWidth.doubleValue()*columnBetween.getPercentWidth()/100));
-                b15.setWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
+        buttonHeight(midLeft, scene.getHeight());
+        buttonHeight(midMid, scene.getHeight());
+        buttonHeight(midRight, scene.getHeight());
 
-                b21.setWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
-                b22.setWidth((newSceneWidth.doubleValue()*columnBetween.getPercentWidth()/100));
-                b23.setWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
-                b24.setWidth((newSceneWidth.doubleValue()*columnBetween.getPercentWidth()/100));
-                b25.setWidth((newSceneWidth.doubleValue()*columnMain.getPercentWidth()/100));
-            }
+        buttonHeight(botLeft, scene.getHeight());
+        buttonHeight(botMid, scene.getHeight());
+        buttonHeight(botRight, scene.getHeight());
+
+        topLeft.setOnAction(event -> buttonAction(topLeft));
+        topMid.setOnAction(event -> buttonAction(topMid));
+        topRight.setOnAction(event -> buttonAction(topRight));
+
+        midLeft.setOnAction(event -> buttonAction(midLeft));
+        midMid.setOnAction(event -> buttonAction(midMid));
+        midRight.setOnAction(event -> buttonAction(midRight));
+
+        botLeft.setOnAction(event -> buttonAction(botLeft));
+        botMid.setOnAction(event -> buttonAction(botMid));
+        botRight.setOnAction(event -> buttonAction(botRight));
+
+
+        scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
+            buttonWidth(topLeft, newSceneWidth);
+            buttonWidth(topMid, newSceneWidth);
+            buttonWidth(topRight, newSceneWidth);
+
+            buttonWidth(midLeft, newSceneWidth);
+            buttonWidth(midMid, newSceneWidth);
+            buttonWidth(midRight, newSceneWidth);
+
+            buttonWidth(botLeft, newSceneWidth);
+            buttonWidth(botMid, newSceneWidth);
+            buttonWidth(botRight, newSceneWidth);
         });
-        scene.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                System.out.println("Height: "+newSceneHeight);
-                topLeft.setMinHeight(newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100));
-                topMid.setMinHeight(newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100));
-                topRight.setMinHeight(newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100));
+        scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
+            buttonHeight(topLeft, newSceneHeight);
+            buttonHeight(topMid, newSceneHeight);
+            buttonHeight(topRight, newSceneHeight);
 
-                midLeft.setMinHeight(newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100));
-                midMid.setMinHeight(newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100));
-                midRight.setMinHeight(newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100));
+            buttonHeight(midLeft, newSceneHeight);
+            buttonHeight(midMid, newSceneHeight);
+            buttonHeight(midRight, newSceneHeight);
 
-                botLeft.setMinHeight(newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100));
-                botMid.setMinHeight(newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100));
-                botRight.setMinHeight(newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100));
-
-                b1.setHeight((newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100)));
-                b2.setHeight((newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100)));
-                b3.setHeight((newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100)));
-                b4.setHeight((newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100)));
-                b5.setHeight((newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100)));
-                b6.setHeight((newSceneHeight.doubleValue()*(rowMain.getPercentHeight()/100)));
-
-                b11.setHeight((newSceneHeight.doubleValue()*(rowBetween.getPercentHeight()/100)));
-                b12.setHeight((newSceneHeight.doubleValue()*(rowBetween.getPercentHeight()/100)));
-                b13.setHeight((newSceneHeight.doubleValue()*(rowBetween.getPercentHeight()/100)));
-                b14.setHeight((newSceneHeight.doubleValue()*(rowBetween.getPercentHeight()/100)));
-                b15.setHeight((newSceneHeight.doubleValue()*(rowBetween.getPercentHeight()/100)));
-
-                b21.setHeight((newSceneHeight.doubleValue()*(rowBetween.getPercentHeight()/100)));
-                b22.setHeight((newSceneHeight.doubleValue()*(rowBetween.getPercentHeight()/100)));
-                b23.setHeight((newSceneHeight.doubleValue()*(rowBetween.getPercentHeight()/100)));
-                b24.setHeight((newSceneHeight.doubleValue()*(rowBetween.getPercentHeight()/100)));
-                b25.setHeight((newSceneHeight.doubleValue()*(rowBetween.getPercentHeight()/100)));
-            }
+            buttonHeight(botLeft, newSceneHeight);
+            buttonHeight(botMid, newSceneHeight);
+            buttonHeight(botRight, newSceneHeight);
         });
 
 //      Set Grid
         grid.add(topLeft, 0,0);
-        grid.add(b1, 1,0);
-        grid.add(topMid, 2,0);
-        grid.add(b2, 3,0);
-        grid.add(topRight, 4,0);
+        grid.add(topMid, 1,0);
+        grid.add(topRight, 2,0);
 
-        grid.add(b11, 0,1);
-        grid.add(b12, 1,1);
-        grid.add(b13, 2,1);
-        grid.add(b14, 3,1);
-        grid.add(b15, 4,1);
 
-        grid.add(midLeft, 0,2);
-        grid.add(b3, 1,2);
-        grid.add(midMid, 2,2);
-        grid.add(midRight, 4,2);
-        grid.add(b4, 3,2);
+        grid.add(midLeft, 0,1);
+        grid.add(midMid, 1,1);
+        grid.add(midRight, 2,1);
 
-        grid.add(b21, 0,3);
-        grid.add(b22, 1,3);
-        grid.add(b23, 2,3);
-        grid.add(b24, 3,3);
-        grid.add(b25, 4,3);
 
-        grid.add(botLeft, 0,4);
-        grid.add(b5, 1,4);
-        grid.add(botMid, 2,4);
-        grid.add(botRight, 4,4);
-        grid.add(b6, 3,4);
+        grid.add(botLeft, 0,2);
+        grid.add(botMid, 1,2);
+        grid.add(botRight, 2,2);
 
         primaryStage.setTitle("Tic-Tac-Toe");
 
         primaryStage.show();
+    }
+
+    private void buttonAction(Button button){
+        Boolean circleBT = circle;
+        if(circleBT){
+            String oImage = "homework/ch14/prob_2/o.gif";
+            button.setGraphic(new ImageView(oImage));
+            gridButtonValue[grid.getChildren().indexOf(button)-1] = "O";
+            circle=false;
+        }else {
+            String xImage = "homework/ch14/prob_2/x.gif";
+            button.setGraphic(new ImageView(xImage));
+            gridButtonValue[grid.getChildren().indexOf(button)-1] = "X";
+            circle=true;
+        }
+        checkBoard();
+    }
+
+    private void buttonHeight(Button button, Number scene){
+        button.setMinHeight(scene.doubleValue()*(rowMain.getPercentHeight()/100));
+    }
+
+    private void buttonWidth(Button button, Number scene){
+        button.setMinWidth(scene.doubleValue()*(columnMain.getPercentWidth()/100));
+    }
+    
+    private void checkBoard(){
+        Boolean topRow = gridButtonValue[0].equals(gridButtonValue[1])&&gridButtonValue[0].equals(gridButtonValue[2])&&!gridButtonValue[0].equals("");
+        Boolean midRow = gridButtonValue[3].equals(gridButtonValue[4])&&gridButtonValue[3].equals(gridButtonValue[5])&&!gridButtonValue[3].equals("");
+        Boolean botRow = gridButtonValue[6].equals(gridButtonValue[7])&&gridButtonValue[6].equals(gridButtonValue[8])&&!gridButtonValue[6].equals("");
+
+        Boolean col1 = gridButtonValue[0].equals(gridButtonValue[3])&&gridButtonValue[0].equals(gridButtonValue[6])&&!gridButtonValue[0].equals("");
+        Boolean col2 = gridButtonValue[1].equals(gridButtonValue[4])&&gridButtonValue[1].equals(gridButtonValue[7])&&!gridButtonValue[1].equals("");
+        Boolean col3 = gridButtonValue[2].equals(gridButtonValue[5])&&gridButtonValue[2].equals(gridButtonValue[8])&&!gridButtonValue[2].equals("");
+
+        Boolean diag1 = gridButtonValue[0].equals(gridButtonValue[4])&&gridButtonValue[0].equals(gridButtonValue[8])&&!gridButtonValue[0].equals("");
+        Boolean diag2 = gridButtonValue[2].equals(gridButtonValue[4])&&gridButtonValue[2].equals(gridButtonValue[6])&&!gridButtonValue[2].equals("");
+
+        if(topRow){
+            resetBoardAlert(gridButtonValue[0]);
+        }
+        if(midRow){
+            resetBoardAlert(gridButtonValue[3]);
+        }
+        if(botRow){
+            resetBoardAlert(gridButtonValue[6]);
+        }
+
+        if(col1){
+            resetBoardAlert(gridButtonValue[0]);
+        }
+        if(col2){
+            resetBoardAlert(gridButtonValue[1]);
+        }
+        if(col3){
+            resetBoardAlert(gridButtonValue[2]);
+        }
+
+        if(diag1){
+            resetBoardAlert(gridButtonValue[0]);
+        }
+        if(diag2){
+            resetBoardAlert(gridButtonValue[2]);
+        }
+    }
+
+    private void resetBoardAlert(String winner){
+        Alert reset = new Alert(Alert.AlertType.CONFIRMATION);
+        reset.setTitle("Reset The Board?");
+        reset.setHeaderText("The "+winner+" Player has won.\nWould you like to reset the board");
+        reset.setResizable(false);
+        reset.setContentText("Select Ok to reset the board, Cancel to close the App");
+        Optional<ButtonType> result = reset.showAndWait();
+        if(result.get()==ButtonType.OK){
+            resetBoard();
+        }else if(result.get()==ButtonType.CANCEL){
+            System.exit(0);
+        }
+    }
+
+    private void resetBoard(){
+        for(int i=0; i<gridButtonValue.length; i++){
+            gridButtonValue[i] = "";
+        }
+
+        topLeft.setGraphic(null);
+        topMid.setGraphic(null);
+        topRight.setGraphic(null);
+
+        midLeft.setGraphic(null);
+        midMid.setGraphic(null);
+        midRight.setGraphic(null);
+
+        botLeft.setGraphic(null);
+        botMid.setGraphic(null);
+        botRight.setGraphic(null);
     }
 }
