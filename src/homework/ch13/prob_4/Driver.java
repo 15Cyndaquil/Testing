@@ -5,7 +5,7 @@ package homework.ch13.prob_4;
  */
 public class Driver {
     public static void main(String[] args){
-        Calendar test = new Calendar();
+        Calendar test = new Calendar(13, new Month("jan"), 2017);
         System.out.println(test.monthToString());
     }
 }
