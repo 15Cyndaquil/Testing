@@ -1,11 +1,13 @@
-package homework.ch14.prob_29;
+package homework.ch15.prob_33;
 
 import javafx.animation.PathTransition;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
@@ -144,7 +146,7 @@ class FXDisplay {
         pane.getChildren().addAll(container6, container7);
     }
 
-    static void animation(int i){
+    private static void animation(int i){
 
         Circle bean = new Circle(250, 0, 10, Color.AQUA);
         Line first = new Line(250, 0, 250, 70);

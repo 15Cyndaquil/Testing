@@ -1,13 +1,8 @@
-package homework.ch14.prob_29;
+package homework.ch15.prob_33;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
-import static homework.ch14.prob_29.FXDisplay.animation;
 
 
 public class Driver extends Application{
