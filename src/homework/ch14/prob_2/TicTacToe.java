@@ -1,14 +1,16 @@
 package homework.ch14.prob_2;
 
 import javafx.application.Application;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Polyline;
 import javafx.stage.Stage;
 
 import java.util.Optional;
@@ -32,12 +34,9 @@ public class TicTacToe extends Application {
     private Button botMid = new Button();
     private Button botRight = new Button();
 
-    private Button getGraphic = new Button();
-
     private GridPane grid = new GridPane();
-    String gridButton[] = new String[9];
-    String gridButtonValue[] = new String[9];
-    Scene scene;
+    private String gridButton[] = new String[9];
+    private String gridButtonValue[] = new String[9];
 
     @Override
     public void start(Stage primaryStage){
@@ -50,7 +49,7 @@ public class TicTacToe extends Application {
         grid.setGridLinesVisible(true);
 
         Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(10,10,10,10)));
-        scene = new Scene(grid, 250, 250, Color.BLACK);
+        Scene scene = new Scene(grid, 250, 250, Color.BLACK);
         primaryStage.setScene(scene);
 
         columnMain.setPercentWidth(33.33);
@@ -110,6 +109,7 @@ public class TicTacToe extends Application {
 
 
         scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
+
             buttonWidth(topLeft, newSceneWidth);
             buttonWidth(topMid, newSceneWidth);
             buttonWidth(topRight, newSceneWidth);

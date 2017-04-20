@@ -23,7 +23,7 @@ public class Calendar extends Month{
         this.currentWeekDay = weekDay(currentDay);
     }
 
-    public String monthToString(){
+    public StringBuilder monthToString(){
         StringBuilder output = new StringBuilder();
         output.append("+-----------------------------------------+\n");
         output.append(String.format("| %-8s %-"+(10-currentMonth.toString().length())+"s%s, %s %"+(int) (18-String.valueOf(currentYear).length())+"s|%n","","",currentMonth,currentYear,""));
@@ -83,7 +83,7 @@ public class Calendar extends Month{
                 break;
         }
         output.append("+-----------------------------------------+");
-        return output.toString();
+        return output;
     }
 
     public String getCurrentWeekDay(){return currentWeekDay;}
