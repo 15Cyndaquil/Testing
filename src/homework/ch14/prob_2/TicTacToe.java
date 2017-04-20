@@ -58,6 +58,7 @@ public class TicTacToe extends Application {
         grid.getRowConstraints().addAll(rowMain, rowMain, rowMain);
         grid.getColumnConstraints().addAll(columnMain, columnMain, columnMain);
 
+        //Set Button Boarders
         topLeft.setBorder(border);
         topMid.setBorder(border);
         topRight.setBorder(border);
@@ -70,7 +71,7 @@ public class TicTacToe extends Application {
         botMid.setBorder(border);
         botRight.setBorder(border);
 
-
+        //Set Button Width/Height
         buttonWidth(topLeft, scene.getWidth());
         buttonWidth(topMid, scene.getWidth());
         buttonWidth(topRight, scene.getWidth());
@@ -95,6 +96,7 @@ public class TicTacToe extends Application {
         buttonHeight(botMid, scene.getHeight());
         buttonHeight(botRight, scene.getHeight());
 
+        //Button Actions
         topLeft.setOnAction(event -> buttonAction(topLeft));
         topMid.setOnAction(event -> buttonAction(topMid));
         topRight.setOnAction(event -> buttonAction(topRight));
@@ -106,7 +108,6 @@ public class TicTacToe extends Application {
         botLeft.setOnAction(event -> buttonAction(botLeft));
         botMid.setOnAction(event -> buttonAction(botMid));
         botRight.setOnAction(event -> buttonAction(botRight));
-
 
         scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
 
@@ -151,8 +152,8 @@ public class TicTacToe extends Application {
         grid.add(botMid, 1,2);
         grid.add(botRight, 2,2);
 
-        primaryStage.setTitle("Tic-Tac-Toe");
 
+        primaryStage.setTitle("Tic-Tac-Toe");
         primaryStage.show();
     }
 
