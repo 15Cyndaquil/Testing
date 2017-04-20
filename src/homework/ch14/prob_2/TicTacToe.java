@@ -1,7 +1,6 @@
 package homework.ch14.prob_2;
 
 import javafx.application.Application;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -9,8 +8,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Polyline;
 import javafx.stage.Stage;
 
 import java.util.Optional;
@@ -228,7 +225,7 @@ public class TicTacToe extends Application {
         reset.setResizable(false);
         reset.setContentText("Select Ok to reset the board, Cancel to close the App");
         Optional<ButtonType> result = reset.showAndWait();
-        if(result.get()==ButtonType.OK){
+        if(ButtonType.OK == result.get()){
             resetBoard();
         }else if(result.get()==ButtonType.CANCEL){
             System.exit(0);
