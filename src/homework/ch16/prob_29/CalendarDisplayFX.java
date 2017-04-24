@@ -1,13 +1,17 @@
 package homework.ch16.prob_29;
 
+import homework.ch13.prob_4.Calendar;
+import homework.ch13.prob_4.Month;
 import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
+
+import java.time.LocalDate;
+import java.util.Scanner;
 
 /**
  * Created by 15Cyndaquil on 4/19/2017.
@@ -16,6 +20,11 @@ public class CalendarDisplayFX {
     private static GridPane grid = new GridPane();
     private static double rowAmt = 9;
     private static double colAmt = 7;
+    private static LocalDate date = LocalDate.now();
+    private static Month month = new Month(date.getMonthValue());
+    private static Calendar current = new Calendar(date.getDayOfMonth(), month.toString(), date.getYear());
+
+    private static Text monthText = new Text();
 
     private static void setRow() {
         for (int i = 0; i < rowAmt; i++){
@@ -32,14 +41,12 @@ public class CalendarDisplayFX {
         }
     }
     private static void addMonth(){
-        Text month = new Text();
-
-        month.setText("Month");
-        grid.add(month, 2, 0);
-        GridPane.setColumnSpan(month, 3);
-        GridPane.setHalignment(month, HPos.CENTER);
+        monthText.setText(current.getMonth()+", "+current.getYear());
+        grid.add(monthText, 2, 0);
+        GridPane.setColumnSpan(monthText, 3);
+        GridPane.setHalignment(monthText, HPos.CENTER);
     }
-    private static void addDays(){
+    private static void addWeekDays(){
         Text sunday = new Text("Sunday");
         Text monday = new Text("Monday");
         Text tuesday = new Text("Tuesday");
@@ -64,18 +71,92 @@ public class CalendarDisplayFX {
         GridPane.setHalignment(friday, HPos.CENTER);
         GridPane.setHalignment(saturday, HPos.CENTER);
     }
+    private static void addDays(){
+        boolean currentMonth = false;
+        int gridRow = 2;
+        int gridCol = 0;
+        StringBuilder calendar = new StringBuilder(534);
+        calendar.append(current.monthToString());
+        calendar.replace(0, calendar.indexOf("+",200)+1, "");
+        calendar.replace(calendar.indexOf("+",200)-1, calendar.lastIndexOf("+")+1, "");
+        while(calendar.indexOf("|")!=-1){
+            int index = calendar.indexOf("|");
+            calendar.replace(index, index+1,"");
+        }
+        Scanner scan = new Scanner(calendar.toString());
+        while(scan.hasNextInt()){
+            int currentDay = scan.nextInt();
+            Text addDay = new Text(String.valueOf(currentDay));
+            grid.add(addDay, gridCol, gridRow);
+            GridPane.setHalignment(addDay, HPos.CENTER);
+
+            if(currentDay!=1&&!currentMonth){
+                addDay.setOpacity(.5);
+            }else if(currentDay==1&&!currentMonth){
+                currentMonth=true;
+            }else if(currentDay==1&&currentMonth){
+                currentMonth=false;
+                addDay.setOpacity(.5);
+            }else if(currentDay==date.getDayOfMonth()&&current.getMonth().equalsIgnoreCase(date.getMonth().toString())){
+                addDay.setFill(Color.HOTPINK);
+            }
+            if(gridCol==6){
+                gridCol=0;
+                gridRow++;
+            }else {
+                gridCol++;
+            }
+        }
+
+
+    }
+    private static void addButtons(){
+        Button next = new Button("Next Month");
+        Button pre = new Button("Previous Month");
+
+        next.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        pre.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+        grid.add(next, 4, 8);
+        grid.add(pre, 1, 8);
+
+        GridPane.setColumnSpan(next, 2);
+        GridPane.setColumnSpan(pre, 2);
+
+        next.setOnAction(e->{
+            grid.getChildren().removeAll(grid.getChildren());
+            current.setMonth(current.getNextMonthString());
+            month.setMonth(current.getNextMonthString());
+            addMonth();
+            addWeekDays();
+            addDays();
+            addButtons();
+        });
+
+        pre.setOnAction(e->{
+            grid.getChildren().removeAll(grid.getChildren());
+            current.setMonth(current.getPreMonthString());
+            month.setMonth(current.getPreMonthString());
+            addMonth();
+            addWeekDays();
+            addDays();
+            addButtons();
+        });
+    }
 
 
 
     public static void setGrid() {
+        current.setMonth(month.toString());
         setCol();
         setRow();
         addMonth();
+        addWeekDays();
         addDays();
+        addButtons();
     }
 
     public static GridPane getGrid() {
-        grid.setGridLinesVisible(true);
         return grid;
     }
 }

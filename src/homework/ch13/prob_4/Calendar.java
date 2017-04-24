@@ -7,16 +7,16 @@ public class Calendar extends Month{
     private int currentDay;
     private long currentYear;
     private String  currentWeekDay;
-    private Month currentMonth;
+    private String currentMonth;
 
     public Calendar(){
         currentYear = 1582;
         currentDay = 1;
-        currentMonth = new Month();
+        currentMonth = "Jan";
         currentWeekDay = "Monday";
     }
 
-    public Calendar(int currentDay, Month currentMonth, long currentYear){
+    public Calendar(int currentDay, String currentMonth, long currentYear){
         this.currentDay = currentDay;
         this.currentMonth = currentMonth;
         this.currentYear = currentYear;
@@ -24,60 +24,65 @@ public class Calendar extends Month{
     }
 
     public StringBuilder monthToString(){
+        int preMonth = new Month(currentMonth).getPreMonth().getDaysInMonth();
         StringBuilder output = new StringBuilder();
         output.append("+-----------------------------------------+\n");
-        output.append(String.format("| %-8s %-"+(10-currentMonth.toString().length())+"s%s, %s %"+(int) (18-String.valueOf(currentYear).length())+"s|%n","","",currentMonth,currentYear,""));
+        output.append(String.format("| %-8s %-"+(10-new Month(currentMonth).toString().length())+"s%s, %s %"+(int) (18-String.valueOf(currentYear).length())+"s|%n","","",new Month(currentMonth),currentYear,""));
         output.append("+-----------------------------------------+\n");
         output.append("| Sun | Mon | Tue | Wed | Thu | Fri | Sat |\n");
         output.append("+-----------------------------------------+\n");
         int i=1;
+
         switch (weekDay(1)) {
             case "Sunday":
                 output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, i++, i++, i++, i++, i++));
                 break;
             case "Monday":
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", "", i++, i++, i++, i++, i++, i++));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", preMonth, i++, i++, i++, i++, i++, i++));
                 break;
             case "Tuesday":
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", "", "", i++, i++, i++, i++, i++));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", preMonth-1, preMonth, i++, i++, i++, i++, i++));
                 break;
             case "Wednesday":
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", "", "", "", i++, i++, i++, i++));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", preMonth-2, preMonth-1, preMonth, i++, i++, i++, i++));
                 break;
             case "Thursday":
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", "", "", "", "", i++, i++, i++));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", preMonth-3, preMonth-2, preMonth-1, preMonth, i++, i++, i++));
                 break;
             case "Friday":
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", "", "", "", "", "", i++, i++));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", preMonth-4, preMonth-3, preMonth-2, preMonth-1, preMonth, i++, i++));
                 break;
             case "Saturday":
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", "", "", "", "", "", "", i++));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", preMonth-5, preMonth-4, preMonth-3, preMonth-2, preMonth-1, preMonth, i++));
                 break;
 
             default:
                 break;
         }
-        while( i<=(currentMonth.getDaysInMonth()-7)){
+        while( i<=(new Month(currentMonth).getDaysInMonth()-7)){
             output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n",i++,i++,i++,i++,i++,i++,i++));
         }
-        switch (currentMonth.getDaysInMonth()-i) {
+        switch (new Month(currentMonth).getDaysInMonth()-i) {
             case 0:
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, "", "", "", "", "", ""));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, 1, 2, 3, 4, 5, 6));
                 break;
             case 1:
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, "", "", "", "", ""));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, 1, 2, 3, 4, 5));
                 break;
             case 2:
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, i++, "", "", "", ""));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, i++, 1, 2, 3, 4));
                 break;
             case 3:
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, i++, i++, "", "", ""));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, i++, i++, 1, 2, 3));
                 break;
             case 4:
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, i++, i++, i++, "", ""));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, i++, i++, i++, 1, 2));
                 break;
             case 5:
-                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, i++, i++, i++, i++, ""));
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, i++, i++, i++, i++, 1));
+                break;
+            case 6:
+                output.append(String.format("| %3s | %3s | %3s | %3s | %3s | %3s | %3s |%n", i++, i++, i++, i++, i++, i++, i++));
                 break;
             default:
                 break;
@@ -87,6 +92,207 @@ public class Calendar extends Month{
     }
 
     public String getCurrentWeekDay(){return currentWeekDay;}
+    public String getMonth(){
+        return new Month(currentMonth).toString();
+    }
+    public void setMonth(String month){
+        if(month.equals("January")&&this.currentMonth.equals("December")){
+            currentYear++;
+        }else if(month.equals("December")&&this.currentMonth.equals("January")){
+            currentYear--;
+        }
+        this.currentMonth = month;
+
+    }
+    public String toString(){ return currentWeekDay+"-"+currentDay+"-"+new Month(currentMonth)+"-"+currentYear;}
+    public long getYear(){
+        return currentYear;
+    }
+
+    public String getPreMonthString(){
+        String output;
+        int monthInt = new Month(currentMonth).getMonthInt();
+        switch (monthInt){
+            case 1:
+                output = "December";
+                break;
+            case 2:
+                output = "January";
+                break;
+            case 3:
+                output = "February";
+                break;
+            case 4:
+                output = "March";
+                break;
+            case 5:
+                output = "April";
+                break;
+            case 6:
+                output = "May";
+                break;
+            case 7:
+                output = "June";
+                break;
+            case 8:
+                output = "July";
+                break;
+            case 9:
+                output = "August";
+                break;
+            case 10:
+                output = "September";
+                break;
+            case 11:
+                output = "October";
+                break;
+            case 12:
+                output = "November";
+                break;
+            default:
+                output = null;
+                break;
+        }
+        return output;
+    }
+    public Month getPreMonth(){
+        Month output;
+        int monthInt = new Month(currentMonth).getMonthInt();
+        switch (monthInt){
+            case 1:
+                output = new Month("December");
+                break;
+            case 2:
+                output = new Month("January");
+                break;
+            case 3:
+                output = new Month("February");
+                break;
+            case 4:
+                output = new Month("March");
+                break;
+            case 5:
+                output = new Month("April");
+                break;
+            case 6:
+                output = new Month("May");
+                break;
+            case 7:
+                output = new Month("June");
+                break;
+            case 8:
+                output = new Month("July");
+                break;
+            case 9:
+                output = new Month("August");
+                break;
+            case 10:
+                output = new Month("September");
+                break;
+            case 11:
+                output = new Month("October");
+                break;
+            case 12:
+                output = new Month("November");
+                break;
+            default:
+                output = null;
+                break;
+        }
+        return output;
+    }
+    public String getNextMonthString(){
+        String output;
+        int monthInt = new Month(currentMonth).getMonthInt();
+        switch (monthInt){
+            case 11:
+                output = "December";
+                break;
+            case 12:
+                output = "January";
+                break;
+            case 1:
+                output = "February";
+                break;
+            case 2:
+                output = "March";
+                break;
+            case 3:
+                output = "April";
+                break;
+            case 4:
+                output = "May";
+                break;
+            case 5:
+                output = "June";
+                break;
+            case 6:
+                output = "July";
+                break;
+            case 7:
+                output = "August";
+                break;
+            case 8:
+                output = "September";
+                break;
+            case 9:
+                output = "October";
+                break;
+            case 10:
+                output = "November";
+                break;
+            default:
+                output = null;
+                break;
+        }
+        return output;
+    }
+    public Month getNextMonth(){
+        Month output;
+        int monthInt = new Month(currentMonth).getMonthInt();
+        switch (monthInt){
+            case 11:
+                output = new Month("December");
+                break;
+            case 12:
+                output = new Month("January");
+                break;
+            case 1:
+                output = new Month("February");
+                break;
+            case 2:
+                output = new Month("March");
+                break;
+            case 3:
+                output = new Month("April");
+                break;
+            case 4:
+                output = new Month("May");
+                break;
+            case 5:
+                output = new Month("June");
+                break;
+            case 6:
+                output = new Month("July");
+                break;
+            case 7:
+                output = new Month("August");
+                break;
+            case 8:
+                output = new Month("September");
+                break;
+            case 9:
+                output = new Month("October");
+                break;
+            case 10:
+                output = new Month("November");
+                break;
+            default:
+                output = null;
+                break;
+        }
+        return output;
+    }
 
 
 
@@ -151,7 +357,7 @@ public class Calendar extends Month{
         if(isLeapYear(currentYear)){
             leapYear++;
         }
-        switch (currentMonth.getMonthInt()){
+        switch (new Month(currentMonth).getMonthInt()){
             case 1:
                 output = currentDay;
                 break;
