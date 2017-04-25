@@ -4,9 +4,7 @@ import homework.ch13.prob_4.Calendar;
 import homework.ch13.prob_4.Month;
 import javafx.geometry.HPos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -98,16 +96,22 @@ class CalendarDisplayFX {
                 addDay.setOpacity(.5);
             }else if(currentDay==date.getDayOfMonth()&&current.getMonth().equalsIgnoreCase(date.getMonth().toString())&&
                     current.getYear()==date.getYear()){
+                grid.getChildren().remove(addDay);
                 addDay.setUnderline(true);
+                addDay.setFill(Color.WHITE);
 
-                Rectangle test = new Rectangle();
-                test.heightProperty().bind(grid.heightProperty().divide(rowAmt));
-                test.widthProperty().bind(grid.widthProperty().divide(colAmt));
-                test.setFill(Color.CORAL);
-                test.setOpacity(.2);
-                grid.add(test, gridCol, gridRow);
-                GridPane.setFillHeight(test, true);
-                GridPane.setFillWidth(test, true);
+                Rectangle outerBoarder = new Rectangle();
+                outerBoarder.heightProperty().bind(grid.heightProperty().divide(rowAmt));
+                outerBoarder.widthProperty().bind(grid.widthProperty().divide(colAmt));
+                outerBoarder.setFill(Color.BLACK);
+                outerBoarder.setOpacity(.2);
+                grid.add(outerBoarder, gridCol, gridRow);
+                GridPane.setFillHeight(outerBoarder, true);
+                GridPane.setFillWidth(outerBoarder, true);
+
+                grid.add(addDay, gridCol, gridRow);
+
+
             }
             if(gridCol==6){
                 gridCol=0;
@@ -157,6 +161,12 @@ class CalendarDisplayFX {
 
     static void setGrid() {
         current.setMonth(month.toString());
+        grid.setBorder(new Border(new BorderStroke(
+                  Color.WHITE
+                , BorderStrokeStyle.SOLID
+                , CornerRadii.EMPTY
+                , new BorderWidths(10,10,10,10))));
+        grid.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, null)));
         setCol();
         setRow();
         addMonth();
@@ -164,7 +174,6 @@ class CalendarDisplayFX {
         addDays();
         addButtons();
     }
-
     static GridPane getGrid() {
         return grid;
     }
