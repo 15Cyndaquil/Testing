@@ -8,15 +8,14 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
-/**
- * Created by 15Cyndaquil on 4/19/2017.
- */
-public class CalendarDisplayFX {
+
+class CalendarDisplayFX {
     private static GridPane grid = new GridPane();
     private static double rowAmt = 9;
     private static double colAmt = 7;
@@ -94,11 +93,21 @@ public class CalendarDisplayFX {
                 addDay.setOpacity(.5);
             }else if(currentDay==1&&!currentMonth){
                 currentMonth=true;
-            }else if(currentDay==1&&currentMonth){
+            }else if(currentDay == 1){
                 currentMonth=false;
                 addDay.setOpacity(.5);
-            }else if(currentDay==date.getDayOfMonth()&&current.getMonth().equalsIgnoreCase(date.getMonth().toString())){
-                addDay.setFill(Color.HOTPINK);
+            }else if(currentDay==date.getDayOfMonth()&&current.getMonth().equalsIgnoreCase(date.getMonth().toString())&&
+                    current.getYear()==date.getYear()){
+                addDay.setUnderline(true);
+
+                Rectangle test = new Rectangle();
+                test.heightProperty().bind(grid.heightProperty().divide(rowAmt));
+                test.widthProperty().bind(grid.widthProperty().divide(colAmt));
+                test.setFill(Color.CORAL);
+                test.setOpacity(.2);
+                grid.add(test, gridCol, gridRow);
+                GridPane.setFillHeight(test, true);
+                GridPane.setFillWidth(test, true);
             }
             if(gridCol==6){
                 gridCol=0;
@@ -146,7 +155,7 @@ public class CalendarDisplayFX {
 
 
 
-    public static void setGrid() {
+    static void setGrid() {
         current.setMonth(month.toString());
         setCol();
         setRow();
@@ -156,7 +165,7 @@ public class CalendarDisplayFX {
         addButtons();
     }
 
-    public static GridPane getGrid() {
+    static GridPane getGrid() {
         return grid;
     }
 }

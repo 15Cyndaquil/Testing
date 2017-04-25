@@ -1,8 +1,6 @@
 package homework.ch13.prob_4;
 
-/**
- * Created by 15Cyndaquil on 4/12/2017.
- */
+
 public class Calendar extends Month{
     private int currentDay;
     private long currentYear;
@@ -27,7 +25,7 @@ public class Calendar extends Month{
         int preMonth = new Month(currentMonth).getPreMonth().getDaysInMonth();
         StringBuilder output = new StringBuilder();
         output.append("+-----------------------------------------+\n");
-        output.append(String.format("| %-8s %-"+(10-new Month(currentMonth).toString().length())+"s%s, %s %"+(int) (18-String.valueOf(currentYear).length())+"s|%n","","",new Month(currentMonth),currentYear,""));
+        output.append(String.format("| %-8s %-"+(10-new Month(currentMonth).toString().length())+"s%s, %s %"+(18-String.valueOf(currentYear).length())+"s|%n","","",new Month(currentMonth),currentYear,""));
         output.append("+-----------------------------------------+\n");
         output.append("| Sun | Mon | Tue | Wed | Thu | Fri | Sat |\n");
         output.append("+-----------------------------------------+\n");
