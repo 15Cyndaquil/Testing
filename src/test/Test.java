@@ -6,8 +6,13 @@ import java.io.PrintWriter;
 
 public class Test {
     public static void main(String[] args) {
-        testFiles();
+        testCont();
     }
+
+    private static void testCont(){
+
+    }
+
 
     private static void testFiles(){
         File dir0 = new File("src/main/java/test/create");
