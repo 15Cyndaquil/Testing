@@ -106,38 +106,26 @@ public class EditAddressFX {
     }
     private static void setButtons(){
         Button add = new Button("Add");
-        Button first = new Button("First");
-        Button pre = new Button("Previous");
-        Button next = new Button("Next");
-        Button last = new Button("Last");
         Button update = new Button("Update");
         Button list = new Button("Entire Address Book");
 
-        grid.add(add,  0, 3);
-        grid.add(first,  1, 3);
-        grid.add(pre,  2, 3);
-        grid.add(next,  3, 3);
-        grid.add(last,  4, 3);
+        grid.add(add,  1, 3);
         grid.add(update,  5, 3);
         grid.add(list,  6, 3);
 
         add.setDefaultButton(false);
-        first.setDefaultButton(false);
-        pre.setDefaultButton(false);
-        next.setDefaultButton(false);
-        last.setDefaultButton(false);
         update.setDefaultButton(false);
         list.setDefaultButton(false);
+
+        add.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
         GridPane.setColumnSpan(list, 2);
 
         GridPane.setHalignment(add, HPos.CENTER);
-        GridPane.setHalignment(first, HPos.CENTER);
-        GridPane.setHalignment(pre, HPos.CENTER);
-        GridPane.setHalignment(next, HPos.CENTER);
-        GridPane.setHalignment(last, HPos.CENTER);
         GridPane.setHalignment(update, HPos.CENTER);
         GridPane.setHalignment(list, HPos.CENTER);
+
+        GridPane.setColumnSpan(add, 3);
 
         add.setOnAction(e->{
             addButton();

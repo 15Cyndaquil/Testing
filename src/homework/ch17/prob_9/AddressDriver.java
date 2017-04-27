@@ -10,14 +10,16 @@ public class AddressDriver extends Application {
     public void start(Stage primaryStage) {
         AddressInOut.loadAddresses();
         EditAddressFX.setGrid();
-        scene = new Scene(EditAddressFX.getGrid(), 600,150);
+        scene = new Scene(EditAddressFX.getGrid(), 655,550);
+        ViewAllAddressFX.setPane();
         EditAddressFX.getGrid().requestFocus();
 
+//        primaryStage.setAlwaysOnTop(true);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    public Scene getScene(){
+    public static Scene getScene(){
         return scene;
     }
 }

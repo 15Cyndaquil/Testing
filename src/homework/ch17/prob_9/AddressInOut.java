@@ -1,5 +1,7 @@
 package homework.ch17.prob_9;
 
+import javafx.scene.control.Alert;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -74,7 +76,6 @@ public class AddressInOut {
         } catch (IOException e) {
 
         }
-        ViewAddressFX.showAddress();
     }
 
     public static void saveAddresses(){
@@ -126,14 +127,23 @@ public class AddressInOut {
     }
 
     public static void addAddress(String firstName, String lastName, String street, String city, String state, Integer zip, Long building) {
-        firstNameList.add(firstName.trim());
-        lastNameList.add(lastName.trim());
-        streetList.add(street.trim());
-        cityList.add(city.trim());
-        stateList.add(state.trim());
-        zipList.add(zip);
-        buildingLongList.add(building);
-        totalAddresses++;
+        if(firstNameList.contains(firstName.trim())&&lastNameList.contains(lastName.trim())
+                &&streetList.contains(street.trim())&&cityList.contains(city.trim())
+                &&stateList.contains(state.trim())&&zipList.contains(zip)&&buildingLongList.contains(building)){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Duplicate Address");
+            alert.setContentText("Address already in book");
+            alert.showAndWait();
+        }else {
+            firstNameList.add(firstName.trim());
+            lastNameList.add(lastName.trim());
+            streetList.add(street.trim());
+            cityList.add(city.trim());
+            stateList.add(state.trim());
+            zipList.add(zip);
+            buildingLongList.add(building);
+            totalAddresses++;
+        }
     }
 
 
