@@ -15,6 +15,9 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 
 public class AnimationFX {
@@ -55,7 +58,7 @@ public class AnimationFX {
                 current=0;
             }
             current++;
-            image.setImage(new Image(new File("src/homework/ch16/prob_23/image", "L"+current+".gif").toURI().toString()));
+            image.setImage(new Image(new File("src/homework/ch16/prob_23/image", prefix+current+".gif").toURI().toString()));
             test.play();
         });
 

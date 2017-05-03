@@ -90,6 +90,7 @@ public class ViewAllAddressFX {
                 name.append(firstName.get(currentIndex)+" "+lastName.get(currentIndex));
                 leftT.setText(name.toString());
                 leftT.setId(String.valueOf(currentIndex));
+                left.setId(String.valueOf(currentIndex));
                 currentName++;
             }
             if(currentName<allInCurrentLetter.size()){
@@ -99,6 +100,7 @@ public class ViewAllAddressFX {
                 name.append(firstName.get(currentIndex)+" "+lastName.get(currentIndex));
                 rightT.setText(name.toString());
                 rightT.setId(String.valueOf(currentIndex));
+                right.setId(String.valueOf(currentIndex));
                 currentName++;
             }
 
@@ -122,6 +124,9 @@ public class ViewAllAddressFX {
                 if(right.isSelected()) {
                     currentSelected.replace(0, currentSelected.length(),"");
                     currentSelected.append(Integer.valueOf(rightT.getId()));
+                }
+                if(rightT.getId()!=right.getId()){
+                    right.setSelected(false);
                 }
             });
         }

@@ -30,7 +30,6 @@ public class AddressInOut {
         File dir = new File("src/homework/ch17/prob_9");
         File file = new File(dir, "address.add");
 
-
         try {
             RandomAccessFile inout = new RandomAccessFile(file.toString(), "rw");
             length = inout.length() / 150;
