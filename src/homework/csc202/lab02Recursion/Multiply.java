@@ -5,7 +5,7 @@ package homework.csc202.lab02Recursion;
  */
 public class Multiply {
     public static void main(String[] args){
-        System.out.println(multiply(5,199));
+        System.out.println(multiply(15,-66));
     }
 
     public static int multiply(int a, int b){

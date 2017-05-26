@@ -5,20 +5,22 @@ package homework.csc202.lab02Recursion;
  */
 public class GCD {
     public static void main(String[] args){
-        System.out.println(gcd(7,6));
+        System.out.println(gcd(-15,66));
     }
 
-    public static int gcd(int a, int b){
-        if(a==b){
+    public static int gcd(int a, int b) {
+        if (a < 0) {a = a - a - a;}
+        if (b < 0) {b = b - b - b;}
+        if (a == b) {
             return a;
-        }else if(a<b&&(b%a==0)){
+        } else if (a < b && (b % a == 0)) {
             return a;
-        }else if(b<a&&(a%b==0)){
+        } else if (b < a && (a % b == 0)) {
             return b;
-        }else if(a<b){
-            return gcd(a-1,b);
-        }else {
-            return gcd(a,b-1);
+        } else if (a < b) {
+            return gcd(a, b - a);
+        } else {
+            return gcd(a - b, b);
         }
     }
 }
