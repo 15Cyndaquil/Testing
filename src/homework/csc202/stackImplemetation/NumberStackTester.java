@@ -1,40 +1,37 @@
 package homework.csc202.stackImplemetation;
 
 /**
- * Created by 15Cyndaquil on 5/31/2017.
+ * Created by 15Cyndaquil on 6/1/2017.
  */
 public class NumberStackTester {
     public static void main(String[] args){
-        int random = (int) (Math.random()*198);
-        int first = (int) (Math.random()*500);
-        first = first*2;
-        NumberStackImp even = new NumberStackImp();
-        even.push(first);
-        first = (int) (Math.random()*500);
-        first = first*2-1;
-        NumberStackImp odd = new NumberStackImp();
-        odd.push(first);
+        int randInt = (int)((Math.random()*500+1)*2);
+        IntStack even = new IntStack();
+        IntStack odd = new IntStack();
 
-        for(int i=0; i<random; i++){
-            int input = (int) (Math.random()*1000);
+        even.push(randInt);
+        randInt = (int)((Math.random()*500+1)*2-1);
+        odd.push(randInt);
 
-            if(input%2==0){
-                even.push(input);
+        randInt = (int)((Math.random()*200)+1);
+        for(int i=0; i<randInt; i++){
+            int randInput = (int)(Math.random()*1000+1);
+            if(randInput%2==0){
+                even.push(randInput);
             }else {
-                odd.push(input);
+                odd.push(randInput);
             }
         }
-
         for(int i=0; i<500; i++){
-            int input = (int) (Math.random()*5000);
-
-            if(input%2==0){
-                even.push(input);
+            int randInput = (int)(Math.random()*5001);
+            if(randInput%2==0){
+                even.push(randInput);
             }else {
-                odd.push(input);
+                odd.push(randInput);
             }
         }
-        System.out.println("Even:\n"+even.printStack());
-        System.out.println("Odd:\n"+odd.printStack());
+
+        System.out.println("Even:\n"+even.printStack()+"\n");
+        System.out.println("Odd:\n"+odd.printStack()+"\n");
     }
 }
