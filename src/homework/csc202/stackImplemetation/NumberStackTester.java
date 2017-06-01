@@ -31,6 +31,10 @@ public class NumberStackTester {
             }
         }
 
+        print(even, odd);
+    }
+
+    public static void print(NumberStack even, NumberStack odd){
         System.out.println("Even:\n"+even.printStack()+"\n");
         System.out.println("Odd:\n"+odd.printStack()+"\n");
     }
