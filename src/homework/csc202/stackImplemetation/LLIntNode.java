@@ -3,22 +3,22 @@ package homework.csc202.stackImplemetation;
 /**
  * Created by 15Cyndaquil on 6/1/2017.
  */
-public class IntNode {
+public class LLIntNode {
     int data;
-    IntNode node;
+    LLIntNode node;
 
-    public IntNode(int data){
+    public LLIntNode(int data){
         this.data = data;
         node=null;
     }
-    public IntNode(int data, IntNode node){
+    public LLIntNode(int data, LLIntNode node){
         this.data = data;
         this.node = node;
     }
 
     public int getData() {return data;}
-    public IntNode getNode() {return node;}
+    public LLIntNode getNode() {return node;}
 
     public void setData(int data) {this.data = data;}
-    public void setNode(IntNode node) {this.node = node;}
+    public void setNode(LLIntNode node) {this.node = node;}
 }

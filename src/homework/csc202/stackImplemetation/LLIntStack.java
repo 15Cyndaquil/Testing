@@ -3,15 +3,15 @@ package homework.csc202.stackImplemetation;
 /**
  * Created by 15Cyndaquil on 6/1/2017.
  */
-public class IntStack implements NumberStack {
-    IntNode node;
+public class LLIntStack implements NumberStack {
+    LLIntNode node;
 
     @Override
     public void push(int data) {
         if(isEmpty()){
-            node = new IntNode(data);
+            node = new LLIntNode(data);
         }else {
-            node = new IntNode(data, node);
+            node = new LLIntNode(data, node);
         }
     }
 
@@ -38,7 +38,7 @@ public class IntStack implements NumberStack {
     @Override
     public int size() {
         int count=0;
-        IntNode tmp = node;
+        LLIntNode tmp = node;
         while(tmp!=null){
             count++;
             tmp=tmp.getNode();
@@ -49,7 +49,7 @@ public class IntStack implements NumberStack {
     @Override
     public String printStack() {
         StringBuilder output = new StringBuilder("");
-        IntNode tmp = node;
+        LLIntNode tmp = node;
         while(tmp!=null){
             output.append(tmp.getData()+", ");
             tmp=tmp.getNode();

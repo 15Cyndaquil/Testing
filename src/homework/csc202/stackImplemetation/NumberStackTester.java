@@ -6,8 +6,8 @@ package homework.csc202.stackImplemetation;
 public class NumberStackTester {
     public static void main(String[] args){
         int randInt = (int)((Math.random()*500+1)*2);
-        IntStack even = new IntStack();
-        IntStack odd = new IntStack();
+        LLIntStack even = new LLIntStack();
+        LLIntStack odd = new LLIntStack();
 
         even.push(randInt);
         randInt = (int)((Math.random()*500+1)*2-1);
