@@ -3,11 +3,10 @@ package homework.csc202.CoinStack;
 /**
  * Created by Cyndaquil on 6/1/2017.
  */
-public interface CoinStackInterface {
-    void push(int data);
+public interface CoinStackInterface{
+
     void pop();
-    boolean isFull();
+    void push(Coin coin);
+    Coin top();
     boolean isEmpty();
-    int top();
-    int size();
 }

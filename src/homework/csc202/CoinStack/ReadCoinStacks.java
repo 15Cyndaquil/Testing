@@ -45,14 +45,15 @@ public class ReadCoinStacks {
         }
     }
 
-    private static void addCoin(int coin){
-        if(coin==1){
+    private static void addCoin(int data){
+        Coin coin = new Coin(data);
+        if(coin.getValue()==1){
             penny.push(coin);
-        }else if(coin==5){
+        }else if(coin.getValue()==5){
             nickel.push(coin);
-        }else if(coin==10){
+        }else if(coin.getValue()==10){
             dime.push(coin);
-        }else if(coin==25){
+        }else if(coin.getValue()==25){
             quarter.push(coin);
         }
     }

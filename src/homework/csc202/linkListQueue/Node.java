@@ -1,3 +1,5 @@
+package homework.csc202.linkListQueue;
+
 public class Node {
 	private int data;
 	private Node node;

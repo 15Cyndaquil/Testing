@@ -1,3 +1,4 @@
+package homework.csc202.linkListQueue;
 
 public class LLNode {
 		private Node first, last;

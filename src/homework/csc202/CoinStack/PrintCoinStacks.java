@@ -9,32 +9,45 @@ public class PrintCoinStacks {
     public static String print(CoinStackInterface penny, CoinStackInterface nickel, CoinStackInterface dime, CoinStackInterface quarter){
         DecimalFormat format = new DecimalFormat("'#'000");
         StringBuilder out = new StringBuilder("");
-        int largestStack = penny.size();
-        if(nickel.size()>largestStack){
-            largestStack=nickel.size();
+
+        int pennySize = 0;
+        int nickelSize = 0;
+        int dimeSize = 0;
+        int quarterSize = 0;
+
+        while(!penny.isEmpty()){            pennySize++;
+            penny.pop();}
+        while(!nickel.isEmpty()){            nickelSize++;
+            nickel.pop();
         }
-        if(dime.size()>largestStack){
-            largestStack=dime.size();
+        while(!dime.isEmpty()){            dimeSize++;
+            dime.pop();
         }
-        if(quarter.size()>largestStack){
-            largestStack=quarter.size();
+        while(!quarter.isEmpty()){            quarterSize++;
+            quarter.pop();
         }
+
+
+        int largestStack = pennySize;
+        if(nickelSize>largestStack){largestStack=nickelSize;}
+        if(dimeSize>largestStack){largestStack=dimeSize;}
+        if(quarterSize>largestStack){largestStack=quarterSize;}
 
         largestStack=largestStack+4;
         out.append("Penny     Nickel     Dime     Quarter\n");
         out.append("|    |    |    |    |    |    |    |\n");
         for(int i=0; i<largestStack; i++){
-            out.append(toPrint(penny, largestStack-i)+"    ");
-            out.append(toPrint(nickel, largestStack-i)+"    ");
-            out.append(toPrint(dime, largestStack-i)+"    ");
-            out.append(toPrint(quarter, largestStack-i)+"\n");
+            out.append(toPrint(pennySize, largestStack-i)+"    ");
+            out.append(toPrint(nickelSize, largestStack-i)+"    ");
+            out.append(toPrint(dimeSize, largestStack-i)+"    ");
+            out.append(toPrint(quarterSize, largestStack-i)+"\n");
         }
-        out.append("|"+format.format(penny.size())+"|    |"+format.format(nickel.size())+"|    |"+format.format(dime.size())+"|    |"+format.format(quarter.size())+"|\n");
+        out.append("|"+format.format(pennySize)+"|    |"+format.format(nickelSize)+"|    |"+format.format(dimeSize)+"|    |"+format.format(quarterSize)+"|\n");
         return out.toString();
     }
 
-    private static String toPrint(CoinStackInterface currentCoin, int currentSize){
-        if(currentSize<=currentCoin.size()){
+    private static String toPrint(int currentCoin, int currentSize){
+        if(currentSize<=currentCoin){
             return "|----|";
         }else {
             return "|    |";
