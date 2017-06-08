@@ -44,10 +44,5 @@ public class LLNode {
 		public boolean isFull(){
 			return false;
 		}
-		public boolean isEmpty(){
-			if(last==null){
-				return true;
-			}else 
-				return false;
-		}
+		public boolean isEmpty(){return last==null;}
 }
