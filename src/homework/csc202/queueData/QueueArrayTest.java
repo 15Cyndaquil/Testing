@@ -6,35 +6,29 @@ package homework.csc202.queueData;
 public class QueueArrayTest {
     public static void main(String[] args){
         QueueArray test = new QueueArray(5);
-        test.inQueue(5);
+        test.enqueue(5);
         System.out.println("Size: "+test.size());
-        test.inQueue(6);
-        test.inQueue(7);
-        test.inQueue(8);
-        test.inQueue(9);
+        test.enqueue(6);
+        test.enqueue(7);
+        test.enqueue(8);
+        test.enqueue(9);
 
-        test.inQueue(10);
+        test.enqueue(10);
 
         System.out.println("Size: "+test.size());
-        System.out.println(test.first());
-        test.deQueue();
+        test.dequeue();
         System.out.println("Size: "+test.size());
-        test.inQueue(5);
+        test.enqueue(5);
         System.out.println("Size: "+test.size());
-        System.out.println(test.first());
-        test.deQueue();
+        test.dequeue();
         System.out.println("Size: "+test.size());
-        System.out.println(test.first());
-        test.deQueue();
+        test.dequeue();
         System.out.println("Size: "+test.size());
-        System.out.println(test.first());
-        test.deQueue();
+        test.dequeue();
         System.out.println("Size: "+test.size());
-        System.out.println(test.first());
-        test.deQueue();
+        test.dequeue();
         System.out.println("Size: "+test.size());
-        System.out.println(test.first());
-        test.deQueue();
+        test.dequeue();
         System.out.println("Size: "+test.size());
     }
 }

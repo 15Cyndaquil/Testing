@@ -4,41 +4,42 @@ package homework.csc202.CoinStack;
  * Created by Cyndaquil on 6/1/2017.
  */
 public class CoinStack implements CoinStackInterface {
-    Node node;
+    Coin coin;
 
     @Override
     public void push(Coin coin) {
         if(isEmpty()){
-            node = new Node(coin);
+            this.coin = coin;
         }else {
-            node = new Node(coin, node);
+            coin.setLink(this.coin);
+            this.coin = coin;
         }
     }
 
     @Override
     public void pop() {
         if(!isEmpty()){
-            node = node.getNode();
+            coin = coin.getLink();
         }
     }
     public boolean isFull() {return false;}
 
     @Override
-    public boolean isEmpty() {return node==null;}
+    public boolean isEmpty() {return coin ==null;}
 
     @Override
     public Coin top() {
         if(!isEmpty()){
-            return node.getData();
+            return coin;
         }else return null;
     }
 
     public int size() {
         int count=0;
-        Node tmp = node;
+        Coin tmp = coin;
         while(tmp!=null){
             count++;
-            tmp=tmp.getNode();
+            tmp=tmp.getLink();
         }
         return count;
     }
