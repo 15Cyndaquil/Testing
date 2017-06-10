@@ -40,8 +40,8 @@ public class ReadCoinStacks {
             }
             System.out.println(file.getName().substring(0, file.getName().length()-4));
             System.out.println(PrintCoinStacks.print(penny, nickel, dime, quarter));
-        }catch (FileNotFoundException e){
-            System.out.println(e.getMessage());
+        }catch(FileNotFoundException e){
+            System.out.println(e);
         }
     }
 

@@ -15,15 +15,20 @@ public class PrintCoinStacks {
         int dimeSize = 0;
         int quarterSize = 0;
 
-        while(!penny.isEmpty()){            pennySize++;
-            penny.pop();}
-        while(!nickel.isEmpty()){            nickelSize++;
+        while(!penny.isEmpty()){
+            pennySize++;
+            penny.pop();
+        }
+        while(!nickel.isEmpty()){
+            nickelSize++;
             nickel.pop();
         }
-        while(!dime.isEmpty()){            dimeSize++;
+        while(!dime.isEmpty()){
+            dimeSize++;
             dime.pop();
         }
-        while(!quarter.isEmpty()){            quarterSize++;
+        while(!quarter.isEmpty()){
+            quarterSize++;
             quarter.pop();
         }
 
@@ -52,5 +57,6 @@ public class PrintCoinStacks {
         }else {
             return "|    |";
         }
+
     }
 }
