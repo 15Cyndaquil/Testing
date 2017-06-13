@@ -15,11 +15,13 @@ public class StartLoopThread implements Runnable {
     @Override
     public void run() {
         while(go) {
+            if (Thread.activeCount() < 500) {
                 Thread go = new Thread(new SummationThread());
                 go.start();
-                if(!masterThread.isAlive()){
-                    stop();
-                }
+            }
+            if (!masterThread.isAlive()) {
+                stop();
+            }
         }
     }
 

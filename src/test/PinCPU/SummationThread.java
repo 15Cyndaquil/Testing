@@ -10,9 +10,19 @@ public class SummationThread implements Runnable {
 
     @Override
     public void run() {
-            short aShort = 0;
-            while (aShort < Short.MAX_VALUE) {
-                aShort++;
+        int anInt = 0;
+        int anInt1 = 0;
+        int anInt2 = 0;
+        int anInt3 = 0;
+        int anInt4 = 0;
+        int anInt5 = 0;
+            while (anInt < Short.MAX_VALUE) {
+                anInt++;
+                anInt1++;
+                anInt2++;
+                anInt3++;
+                anInt4++;
+                anInt5++;
             }
     }
 

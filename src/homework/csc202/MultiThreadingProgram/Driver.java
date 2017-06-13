@@ -1,6 +1,6 @@
 package homework.csc202.MultiThreadingProgram;
 
-import java.text.DecimalFormat;
+
 
 /**
  * Created by 15Cyndaquil on 6/8/2017.
@@ -9,13 +9,13 @@ public class Driver {
     public static void main(String[] args){
         int[][] array = new int[20][20];
         int[] summedArray = new int[20];
-        String[] done = new String[20];
+        OneIntToPassThrough done = new OneIntToPassThrough();
+
 
         for(int row=0; row<array.length; row++){
             int[] arrayToSum = new int[20];
             for(int col=0; col<array.length; col++){
                 int rand = (int)(Math.random()*100+1);
-//                int rand = col;
                 array[row][col] = rand;
                 arrayToSum[row] = arrayToSum[row]+rand;
             }
@@ -30,16 +30,21 @@ public class Driver {
         }
         System.out.print("\n");
         boolean go = true;
-        while(go){
-            boolean toBreak = true;
-            for(int i=0; i<done.length; i++){
-                if(!done[i].equals("Done")){
-                    toBreak=false;
+        while(go) {
+//            for(int i=0; i<done.length; i++) {
+                if (done.getInt() != 20) {
+                    go = true;
+                    System.out.print(done.getInt()+", ");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+
+                    }
+                } else {
+                    go = false;
+
                 }
-                if(toBreak){
-                    go=false;
-                }
-            }
+//            }
         }
 
         int index = -1;

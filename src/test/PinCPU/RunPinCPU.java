@@ -109,13 +109,13 @@ public class RunPinCPU extends Application {
         cpu.setAlignment(Pos.CENTER);
         currentCPU.getChildren().addAll(cpu, cpuCurrentValueTxt);
         cpuCurrentValueTxt.setAlignment(Pos.CENTER_LEFT);
-        cpuCurrentValueTxt.setMaxWidth(57);
+        cpuCurrentValueTxt.setMaxWidth(58);
 
 
         HBox currentRAM = new HBox();
         currentRAM.setAlignment(Pos.CENTER);
         currentRAM.getChildren().addAll(new Label("RAM: "), ramCurrentValueTxt);
-        ramCurrentValueTxt.setMaxWidth(57);
+        ramCurrentValueTxt.setMaxWidth(58);
 
         currentValues.getChildren().addAll(currentCPU,currentRAM);
 
@@ -128,7 +128,7 @@ public class RunPinCPU extends Application {
         Thread cpuLoad = new Thread(new ChartUpdateThread(Thread.currentThread()));
         cpuLoad.start();
         primaryStage.setScene(new Scene(pane));
-        primaryStage.setX(1913);
+        primaryStage.setX(0);
         primaryStage.setY(0);
         primaryStage.show();
     }
