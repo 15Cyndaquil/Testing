@@ -26,7 +26,7 @@ import javafx.util.StringConverter;
  */
 public class RunPinCPU extends Application {
 
-    final static int SECOND_VARIABLE = 14;
+    final static int SECOND_VARIABLE = 4;
 
     static DoubleProperty cpuLoadValue = new SimpleDoubleProperty();
     static DoubleProperty ramLoadValue = new SimpleDoubleProperty();
