@@ -11,6 +11,7 @@ public class ShoppingBag implements ShoppingBagInterface {
     int cap;
     int index = -1;
 
+
     public ShoppingBag(float taxRate, int cap){
         this.taxRate = taxRate;
         this.cap = cap;
