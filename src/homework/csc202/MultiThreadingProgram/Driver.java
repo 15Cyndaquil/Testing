@@ -9,7 +9,7 @@ public class Driver {
     public static void main(String[] args){
         int[][] array = new int[20][20];
         int[] summedArray = new int[20];
-        OneIntToPassThrough done = new OneIntToPassThrough();
+        String[] done = new String[20];
 
 
         for(int row=0; row<array.length; row++){
@@ -31,10 +31,9 @@ public class Driver {
         System.out.print("\n");
         boolean go = true;
         while(go) {
-//            for(int i=0; i<done.length; i++) {
-                if (done.getInt() != 20) {
+            for(int i=0; i<done.length; i++) {
+                if (!done[i].equals("Done")) {
                     go = true;
-                    System.out.print(done.getInt()+", ");
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -44,7 +43,7 @@ public class Driver {
                     go = false;
 
                 }
-//            }
+            }
         }
 
         int index = -1;

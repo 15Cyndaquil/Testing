@@ -8,12 +8,12 @@ import javafx.beans.property.SimpleIntegerProperty;
  */
 public class ArraySuming implements Runnable {
     Thread thread;
-    OneIntToPassThrough done;
+    String[] done;
     int[] summedArray;
     int[] arrayToSum;
     int row;
 
-    public ArraySuming(int[] summedArray, int[] arrayToSum, int row, OneIntToPassThrough done){
+    public ArraySuming(int[] summedArray, int[] arrayToSum, int row, String[] done){
         this.done = done;
         this.summedArray = summedArray;
         this.arrayToSum = arrayToSum;
@@ -28,8 +28,7 @@ public class ArraySuming implements Runnable {
             output = output+arrayToSum[i];
         }
         summedArray[row] = output;
-        done.add();
-        System.out.println("Done: "+done.getInt());
+        done[row]= "Done";
     }
 
     public void start(){
