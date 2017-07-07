@@ -9,19 +9,19 @@ import java.util.Scanner;
  */
 public class CryptGram {
     private static Letter[] orderedFrequency = new Letter[26];
-    private static final String ALPHABET = "abcdefhijklmnopqrstuvwxyzg";
+    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
     public static void main(String[] args){
         for(int i=0; i<orderedFrequency.length; i++){
             orderedFrequency[i] = new Letter(ALPHABET.charAt(i), 0);
         }
-        File cryptgram = new File("src/homework.csc202.midterm/problem2", "cryptgram.txt");
+        File cryptgram = new File("src/homework/csc202/midterm/problem2", "cryptgram.txt");
         createLetterFrequencyFromFile(cryptgram);
         for(int i=0; i<orderedFrequency.length; i++){
             System.out.print(orderedFrequency[i].getChar()+","+orderedFrequency[i].getFrequency()+"; ");
         }
-        System.out.println("\n"+encode("Hello my name is Tyler"));
-        System.out.println(decode(encode("Hello my name is Tyler")));
+        System.out.println("\n"+encode("program"));
+        System.out.println(decode(encode("program")));
 
     }
     private static void createLetterFrequencyFromFile(File file){
@@ -85,7 +85,7 @@ public class CryptGram {
     private static void bubbleSort(Letter[] array){
         for(int n=0; n<array.length; n++) {
             for (int i = 0; i < array.length-1; i++) {
-                    if (array[i].getFrequency() < array[i + 1].getFrequency()) {
+                    if (array[i].getFrequency() > array[i + 1].getFrequency()) {
                         Letter tmp = array[i + 1];
                         array[i + 1] = array[i];
                         array[i] = tmp;

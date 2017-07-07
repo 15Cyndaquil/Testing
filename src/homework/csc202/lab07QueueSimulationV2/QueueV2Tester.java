@@ -3,37 +3,43 @@ package homework.csc202.lab07QueueSimulationV2;
 
 import homework.csc202.stackImplemetation.LLIntStack;
 
-import java.util.ArrayList;
-
 
 /**
  * Created by 15Cyndaquil on 6/13/2017.
  */
 public class QueueV2Tester {
-    private static final int SERVINGTIME = 3;
-    private static final int RUN_TIME_MIN =480;
-    private static final int DAYS_TO_RUN = 10;
-    public static void main(String[] args){
-        for(int day=1; day<=DAYS_TO_RUN; day++) {
+    private int servingTime;
+    private int hours;
+    private int days;
+    private CustomerQueue[][] array;
+
+    private double averageWaitTime;
+    private int remainingTime, served, left, largestQueue, totalWaitTime, totalRunTime, longestWaitTime, totalCustomers;
+
+    public QueueV2Tester(int hours, int days, int servingTime){
+        this.hours=hours;
+        this.days=days;
+        this.servingTime=servingTime;
+        totalCustomers=longestWaitTime=remainingTime=served=left=largestQueue=totalWaitTime=0;
+    }
+
+    public void runSimulation() {
+        int minsToRun = hours*60;
+        array = new CustomerQueue[minsToRun+(100)][days];
+        for (int day = 0; day < days; day++) {
             CustomerQueue queue = new CustomerQueue(10);
             LLIntStack waitTimeList = new LLIntStack();
 
-            double averageWaitTime;
 
-            int remainingTime, served, left, largestQueue, totalWaitTime, totalRunTime, longestWaitTime, totalCustomers;
-            totalCustomers=longestWaitTime=remainingTime=served=left=largestQueue=totalWaitTime=0;
-
-            boolean isInServing=false;
-
-
-            totalRunTime = RUN_TIME_MIN;
+            boolean isInServing = false;
+            totalRunTime =minsToRun;
             for (int currentMin = 0; currentMin < totalRunTime; currentMin++) {
-                if (currentMin < RUN_TIME_MIN && 1 == (int) (Math.random() * 5)) {
+                if (currentMin < minsToRun && 1 == (int) (Math.random() * 5)) {
                     totalCustomers++;
                     if (queue.isFull()) {
                         left++;
                     } else {
-                        queue.enqueue(new Customer(currentMin));
+                        queue.enqueue(new Customer(currentMin, (int) (Math.random() * 11)));
                         if (queue.size() > largestQueue) {
                             largestQueue = queue.size();
                         }
@@ -51,34 +57,36 @@ public class QueueV2Tester {
                             remainingTime--;
                         }
                     } else {
-                        remainingTime = SERVINGTIME;
+                        remainingTime = servingTime;
                         isInServing = true;
                     }
                 }
-                if (currentMin == totalRunTime-1) {
+                if (currentMin == totalRunTime - 1) {
                     if (!queue.isEmpty()) {
                         totalRunTime++;
                     }
                 }
+                array[currentMin][day]= (CustomerQueue) queue.clone();
             }
 
 
             for (int i = 0; i < served; i++) {
                 totalWaitTime += waitTimeList.top();
-                if(longestWaitTime<waitTimeList.top()){
-                    longestWaitTime=waitTimeList.top();
+                if (longestWaitTime < waitTimeList.top()) {
+                    longestWaitTime = waitTimeList.top();
                 }
                 waitTimeList.pop();
             }
-            averageWaitTime = (double) totalWaitTime / served;
-
-            System.out.println("Day: "+day);
-            System.out.println("Total customers arrived: "+(served+left)+" "+totalCustomers);
-            System.out.println("Number Served: " + served);
-            System.out.println("Number Left: " + left);
-            System.out.println("Largest Queue: " + largestQueue);
-            System.out.println("Longest Wait Time: "+longestWaitTime);
-            System.out.println("Average Wait Length: " + averageWaitTime+"\n");
         }
+        averageWaitTime = (double) totalWaitTime / served;
+    }
+
+    public double getAverageWaitTime() {return averageWaitTime;}
+    public int getLongestWaitTime() {return longestWaitTime;}
+    public int getTotalCustomers() {return totalCustomers;}
+    public int getLeft() {return left;}
+
+    public CustomerQueue getQueue(int min, int day){
+        return array[min][day];
     }
 }

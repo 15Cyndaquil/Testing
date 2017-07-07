@@ -3,7 +3,7 @@ package homework.csc202.lab07QueueSimulationV2;
 /**
  * Created by 15Cyndaquil on 6/13/2017.
  */
-public class CustomerQueue {
+public class CustomerQueue implements Cloneable{
 
     private Customer[] data;
     private int front, rear, numberOfItems, capacity;
@@ -39,6 +39,23 @@ public class CustomerQueue {
             return val;
         }else{
             return null;
+        }
+    }
+
+    public void println(){
+        for(int i=0; i<numberOfItems; i++){
+            System.out.print(data[i].toString()+", ");
+        }
+        System.out.println("");
+    }
+
+    public Object clone() {
+        try {
+            // call clone in Object.
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.out.println("Cloning not allowed.");
+            return this;
         }
     }
 }
