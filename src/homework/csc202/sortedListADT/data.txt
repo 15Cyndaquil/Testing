@@ -1,0 +1,9 @@
+CSC 201
+Computre Science I
+Professor Davis
+CSC 202
+Computer Science II
+Dr. Bai
+CSC 205
+Computer Organization
+Professor Kanet

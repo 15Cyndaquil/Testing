@@ -1,4 +1,4 @@
-package BinaryExpressionTree;
+package homework.csc202.BinaryExpressionTree;
 
 /**
  * Created by 15Cyndaquil on 5/31/2017.
