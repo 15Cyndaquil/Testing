@@ -102,7 +102,10 @@ class BXT {
             if(node.getLeft()!=null){
                 displayHelper(node.getRight(), count+1);
             }
-            System.out.println(node.getValue());
+            for(int i=0; i<count; i++){
+                System.out.print("    ");
+            }
+            System.out.println(String.format("%2s",node.getValue()));
             if(node.getRight()!=null){
                 displayHelper(node.getLeft(), count+1);
             }
